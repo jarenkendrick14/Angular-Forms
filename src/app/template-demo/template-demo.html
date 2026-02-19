@@ -1,0 +1,75 @@
+<div class="content-card">
+  <div class="card-title-section">
+    <h2>Client Registration</h2>
+    <p>Provide basic company information to initialize the business account.</p>
+  </div>
+
+  <div class="card-body">
+    <form #businessForm="ngForm" (ngSubmit)="businessForm.form.valid && onSubmit()" novalidate>
+      
+      <div class="grid-layout">
+        <!-- Username (Company Key) -->
+        <div class="input-field-group">
+          <label>Organization Handle</label>
+          <input type="text" class="control-input" name="username" 
+                 [(ngModel)]="formData.username" #u="ngModel" required minlength="4">
+          @if (u.invalid && (u.touched || businessForm.submitted)) {
+            <span class="val-error">Required (min 4 chars)</span>
+          }
+        </div>
+
+        <!-- Role (Business Sector) -->
+        <div class="input-field-group">
+          <label>Industry Sector</label>
+          <select class="control-select" name="role" [(ngModel)]="formData.role" required #r="ngModel">
+            <option value="" disabled selected>Select Industry...</option>
+            <option value="Tech">Technology</option>
+            <option value="Finance">Finance</option>
+            <option value="Health">Healthcare</option>
+          </select>
+          @if (r.invalid && businessForm.submitted) { <span class="val-error">Required</span> }
+        </div>
+
+        <!-- Email -->
+        <div class="input-field-group col-span-2">
+          <label>Primary Contact Email</label>
+          <input type="email" class="control-input" name="email" 
+                 [(ngModel)]="formData.email" required email>
+        </div>
+
+        <!-- Password (System PIN) -->
+        <div class="input-field-group col-span-2">
+          <label>Internal Security PIN</label>
+          <input type="password" class="control-input" name="password" 
+                 [(ngModel)]="formData.password" required minlength="6">
+        </div>
+
+        <!-- EXTRA FIELDS -->
+        <div class="input-field-group">
+          <label>Company Website</label>
+          <input type="text" class="control-input" name="web" [(ngModel)]="formData.website" placeholder="https://">
+        </div>
+
+        <div class="input-field-group">
+          <label>Region</label>
+          <select class="control-select" name="region" [(ngModel)]="formData.region">
+            <option value="NA">North America</option>
+            <option value="EU">Europe</option>
+            <option value="APAC">Asia Pacific</option>
+          </select>
+        </div>
+
+        <div class="input-field-group col-span-2">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.875rem; text-transform: none;">
+            <input type="checkbox" name="terms" [(ngModel)]="formData.terms" required>
+            Accept organization data policy
+          </label>
+        </div>
+      </div>
+
+      <div class="action-footer">
+        <button type="submit" class="primary-btn">Initialize Account</button>
+      </div>
+    </form>
+  </div>
+</div>

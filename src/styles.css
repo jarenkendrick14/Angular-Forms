@@ -1,1 +1,207 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand Colors */
+  --brand-primary: #4f46e5;      /* Indigo 600 */
+  --brand-primary-soft: #eef2ff;
+  --brand-success: #10b981;
+  --brand-danger: #ef4444;
+  
+  /* Neutral Palette */
+  --bg-app: #f8fafc;             /* Slate 50 */
+  --bg-surface: #ffffff;
+  --text-heading: #0f172a;       /* Slate 900 */
+  --text-body: #475569;          /* Slate 600 */
+  --text-muted: #94a3b8;
+  
+  /* UI Elements */
+  --border-ui: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --radius-lg: 12px;
+  --radius-md: 8px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Navigation Bar --- */
+.header-nav {
+  height: 64px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-ui);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+
+.logo-area {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  margin-right: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  height: 100%;
+}
+
+.nav-item {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-body);
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  cursor: pointer; /* Force pointer to ensure clickability feel */
+}
+
+.nav-item:hover {
+  color: var(--brand-primary);
+  background: var(--brand-primary-soft);
+}
+
+.nav-item.active-link {
+  color: var(--brand-primary);
+  border-bottom-color: var(--brand-primary);
+}
+
+/* --- Layout Container --- */
+.page-view {
+  max-width: 900px;
+  margin: 48px auto;
+  padding: 0 24px;
+}
+
+/* --- Modern Form Card --- */
+.content-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.card-title-section {
+  padding: 32px 32px 0 32px;
+}
+
+.card-title-section h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.card-title-section p {
+  margin: 8px 0 0 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.card-body {
+  padding: 32px;
+}
+
+/* --- Form Grid --- */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+.input-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+}
+
+.control-input, .control-select, textarea {
+  background: #ffffff;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.control-input:focus, .control-select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* --- Action Buttons --- */
+.action-footer {
+  margin-top: 40px;
+  padding: 24px 32px;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-ui);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.primary-btn {
+  background: var(--brand-primary);
+  color: white;
+  padding: 10px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+.primary-btn:hover {
+  background: #4338ca;
+}
+
+.primary-btn:active {
+  transform: scale(0.98);
+}
+
+.primary-btn:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Validations */
+.val-error {
+  color: var(--brand-danger);
+  font-size: 0.75rem;
+  font-weight: 500;
+}

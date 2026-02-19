@@ -1,0 +1,76 @@
+<div class="content-card">
+  <div class="card-title-section">
+    <h2>Identity Management</h2>
+    <p>Configure user access levels and security permissions.</p>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+      
+      <div class="grid-layout">
+        <!-- Username -->
+        <div class="input-field-group">
+          <label>Identity ID</label>
+          <input class="control-input" formControlName="username">
+          @if (f['username'].invalid && f['username'].touched) {
+            <span class="val-error">4-12 Alpha-numeric required</span>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="input-field-group">
+          <label>Authentication Email</label>
+          <input class="control-input" type="email" formControlName="email">
+        </div>
+
+        <!-- Role -->
+        <div class="input-field-group">
+          <label>System Role</label>
+          <select class="control-select" formControlName="role">
+            <option value="Admin">Administrator</option>
+            <option value="User">Standard User</option>
+            <option value="Guest">External Partner</option>
+          </select>
+        </div>
+
+        <!-- Password -->
+        <div class="input-field-group">
+          <label>Master Password</label>
+          <input class="control-input" type="password" formControlName="password">
+        </div>
+
+        <!-- EXTRA 1: Gender (Radio) -->
+        <div class="input-field-group">
+          <label>Profile Gender</label>
+          <div style="display: flex; gap: 15px; padding-top: 8px;">
+            <label style="text-transform:none; font-weight:400;"><input type="radio" value="Male" formControlName="gender"> Male</label>
+            <label style="text-transform:none; font-weight:400;"><input type="radio" value="Female" formControlName="gender"> Female</label>
+          </div>
+        </div>
+
+        <!-- EXTRA 2: Department -->
+        <div class="input-field-group">
+          <label>Department</label>
+          <select class="control-select" formControlName="dept">
+            <option value="IT">Engineering</option>
+            <option value="Sales">Revenue & Growth</option>
+            <option value="HR">People Ops</option>
+          </select>
+        </div>
+
+        <!-- EXTRA 3: Bio -->
+        <div class="input-field-group col-span-2">
+          <label>Internal Bio / Notes</label>
+          <textarea class="control-input" rows="3" formControlName="comments"></textarea>
+        </div>
+      </div>
+
+      <div class="action-footer">
+        <button class="primary-btn" type="submit" [disabled]="reactiveForm.invalid">
+          Provision User
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

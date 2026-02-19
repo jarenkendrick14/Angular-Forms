@@ -1,0 +1,79 @@
+<div class="content-card">
+  <div class="card-title-section">
+    <h2>Project Proposal Submission</h2>
+    <p>Submit a formal request for new project initialization and budget approval.</p>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="proposalForm" (ngSubmit)="onSubmit()">
+      
+      <div class="grid-layout">
+        
+        <!-- 1. Project Title (Full Width) -->
+        <div class="input-field-group col-span-2">
+          <label>Formal Project Title</label>
+          <input class="control-input" formControlName="projectTitle" placeholder="e.g. Infrastructure Modernization 2025">
+          @if (f['projectTitle'].invalid && f['projectTitle'].touched) {
+            <span class="val-error">Title must be at least 10 characters long.</span>
+          }
+        </div>
+
+        <!-- 2. Department -->
+        <div class="input-field-group">
+          <label>Originating Department</label>
+          <select class="control-select" formControlName="department">
+            <option value="" disabled selected>Select Dept...</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Operations">Operations</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Legal">Legal & Compliance</option>
+          </select>
+        </div>
+
+        <!-- 3. Budget -->
+        <div class="input-field-group">
+          <label>Estimated Budget (USD)</label>
+          <input class="control-input" type="number" formControlName="budget" placeholder="$1,000 - $50,000">
+          @if (f['budget'].invalid && f['budget'].touched) {
+            <span class="val-error">Budget must be between $1k and $50k.</span>
+          }
+        </div>
+
+        <!-- 4. Priority (Radio Buttons) -->
+        <div class="input-field-group">
+          <label>Project Priority</label>
+          <div style="display: flex; gap: 15px; padding-top: 8px;">
+            <label style="text-transform:none; font-weight:400;"><input type="radio" value="Low" formControlName="priority"> Low</label>
+            <label style="text-transform:none; font-weight:400;"><input type="radio" value="Medium" formControlName="priority"> Medium</label>
+            <label style="text-transform:none; font-weight:400;"><input type="radio" value="High" formControlName="priority"> High</label>
+          </div>
+        </div>
+
+        <!-- 5. Pitch (Textarea - Full Width) -->
+        <div class="input-field-group col-span-2">
+          <label>Executive Summary / Pitch</label>
+          <textarea class="control-input" rows="4" formControlName="pitch" placeholder="Describe the project goals and expected outcomes (min 30 chars)..."></textarea>
+          @if (f['pitch'].invalid && f['pitch'].touched) {
+            <span class="val-error">Please provide a more detailed summary (30+ chars).</span>
+          }
+        </div>
+
+        <!-- 6. Confirmation -->
+        <div class="input-field-group col-span-2">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.875rem; text-transform: none;">
+            <input type="checkbox" formControlName="confirmAccuracy">
+            I certify that all budget estimates are accurate.
+          </label>
+        </div>
+
+      </div>
+
+      <div class="action-footer">
+        <button class="primary-btn" type="submit" [disabled]="proposalForm.invalid">
+          Submit Proposal
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
