@@ -1,29 +1,41 @@
 <div class="content-card">
   <div class="card-title-section">
-    <h2>Identity Management</h2>
-    <p>Configure user access levels and security permissions.</p>
+    <h2>Identity & Access Management</h2>
+    <p>Model-driven security configuration for corporate user accounts.</p>
   </div>
 
   <div class="card-body">
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
       
       <div class="grid-layout">
-        <!-- Username -->
+        <!-- 1. Username -->
         <div class="input-field-group">
-          <label>Identity ID</label>
-          <input class="control-input" formControlName="username">
-          @if (f['username'].invalid && f['username'].touched) {
-            <span class="val-error">4-12 Alpha-numeric required</span>
+          <label>Identity Handle</label>
+          <input class="control-input" formControlName="username" placeholder="4-12 chars">
+          @if (f['username'].invalid && (f['username'].touched || f['username'].dirty)) {
+            <span class="val-error">4-12 chars (letters/numbers/_)</span>
           }
         </div>
 
-        <!-- Email -->
+        <!-- 2. Email -->
         <div class="input-field-group">
-          <label>Authentication Email</label>
-          <input class="control-input" type="email" formControlName="email">
+          <label>Primary Email</label>
+          <input class="control-input" type="email" formControlName="email" placeholder="user@nexus.com">
+          @if (f['email'].invalid && (f['email'].touched || f['email'].dirty)) {
+            <span class="val-error">Enter a valid corporate email</span>
+          }
         </div>
 
-        <!-- Role -->
+        <!-- 3. Password (Full Width) -->
+        <div class="input-field-group col-span-2">
+          <label>Master Password</label>
+          <input class="control-input" type="password" formControlName="password">
+          @if (f['password'].invalid && (f['password'].touched || f['password'].dirty)) {
+            <span class="val-error">8+ chars, with upper, lower, and number</span>
+          }
+        </div>
+
+        <!-- 4. Role -->
         <div class="input-field-group">
           <label>System Role</label>
           <select class="control-select" formControlName="role">
@@ -33,39 +45,49 @@
           </select>
         </div>
 
-        <!-- Password -->
-        <div class="input-field-group">
-          <label>Master Password</label>
-          <input class="control-input" type="password" formControlName="password">
-        </div>
-
-        <!-- EXTRA 1: Gender (Radio) -->
-        <div class="input-field-group">
-          <label>Profile Gender</label>
-          <div style="display: flex; gap: 15px; padding-top: 8px;">
-            <label style="text-transform:none; font-weight:400;"><input type="radio" value="Male" formControlName="gender"> Male</label>
-            <label style="text-transform:none; font-weight:400;"><input type="radio" value="Female" formControlName="gender"> Female</label>
-          </div>
-        </div>
-
-        <!-- EXTRA 2: Department -->
+        <!-- --- THE "DEPT" FIX --- -->
         <div class="input-field-group">
           <label>Department</label>
           <select class="control-select" formControlName="dept">
-            <option value="IT">Engineering</option>
+            <option value="Engineering">Engineering</option>
             <option value="Sales">Revenue & Growth</option>
             <option value="HR">People Ops</option>
           </select>
         </div>
 
-        <!-- EXTRA 3: Bio -->
+        <!-- --- ADDITIONAL TASKS --- -->
+
+        <!-- 5. Gender (Radio) -->
+        <div class="input-field-group">
+          <label>Gender Profile</label>
+          <div style="display: flex; gap: 15px; padding-top: 8px;">
+            <label style="text-transform:none; font-weight:400;">
+              <input type="radio" value="Male" formControlName="gender"> Male
+            </label>
+            <label style="text-transform:none; font-weight:400;">
+              <input type="radio" value="Female" formControlName="gender"> Female
+            </label>
+          </div>
+        </div>
+
+        <!-- 6. Status (Select) -->
+        <div class="input-field-group">
+          <label>Employment Status</label>
+          <select class="control-select" formControlName="status">
+            <option value="Permanent">Permanent</option>
+            <option value="Probationary">Probationary</option>
+          </select>
+        </div>
+
+        <!-- 7. Comments (Textarea) -->
         <div class="input-field-group col-span-2">
-          <label>Internal Bio / Notes</label>
-          <textarea class="control-input" rows="3" formControlName="comments"></textarea>
+          <label>Administrative Notes</label>
+          <textarea class="control-input" rows="3" formControlName="comments" placeholder="Internal bio or notes..."></textarea>
         </div>
       </div>
 
       <div class="action-footer">
+        <!-- [disabled] logic from original lab screenshot -->
         <button class="primary-btn" type="submit" [disabled]="reactiveForm.invalid">
           Provision User
         </button>
